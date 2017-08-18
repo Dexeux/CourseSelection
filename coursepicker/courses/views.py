@@ -7,7 +7,7 @@ from rest_framework.decorators import api_view, authentication_classes, permissi
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
 from django.db.models import Q
-from models import Course
+from courses.models import Course
 import json
 
 User = get_user_model()
@@ -17,7 +17,7 @@ User = get_user_model()
 @permission_classes((IsAuthenticated,))
 def courses(request):
     """
-    Create a course
+    Create a course or list of courses
     Request load: [{courseCode: '', courseName: '', courseSubject: ''}]
     """
     response = Response(data={'status': 'error'}, status=status.HTTP_200_OK)
@@ -49,8 +49,6 @@ def courses(request):
 
 
 @api_view(['GET'])
-@authentication_classes((TokenAuthentication,))
-@permission_classes((IsAuthenticated,))
 def courses(request):
     """
     Get a list of course
@@ -103,8 +101,8 @@ def register(request):
     """
     response = Response(data={'status': 'error'}, status=status.HTTP_200_OK)
     user = request.user
-    courses = user.course_set.all()
-    courses_dict = ([obj.as_dict() for obj in courses])
+    user_courses = user.course_set.all()
+    courses_dict = ([obj.as_dict() for obj in user_courses])
     response.data = {
             'status': 'success',
             'data': courses_dict

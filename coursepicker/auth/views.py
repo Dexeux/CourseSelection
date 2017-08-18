@@ -18,21 +18,16 @@ def create_user(request):
     """
     response = Response(data={'status': 'error'}, status=status.HTTP_200_OK)
     request_data = json.loads(request.body)
-    #print(request_data)
-    if request_data.get('username') and request_data.get('password'): # and request_data.get('email'):
+    if request_data.get('username') and request_data.get('password'):
         if User.objects.filter(username=request_data['username']).exists():
             response.data = {'status': 'error', 'message': 'Username is already taken'}
             return response
         elif len(request_data.get('password')) < 8:
             response.data = {'status': 'error', 'message': 'Password must be at least 8 characters'}
             return response
-        # elif "@" not in request_data.get('email') or "." not in request_data.get('email'):
-        #     response.data = {'status': 'error', 'message': 'Please use a valid email'}
-        #     return response
         else:
             print("to user")
             user = User.objects.create_user(username=request_data['username'],
-                                            # email=request_data['email'],
                                             password=request_data['password'])
             token = Token.objects.create(user=user)
             response.data = {

@@ -1,0 +1,51 @@
+﻿a {
+    cursor: pointer;
+}
+
+.alert {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 0px;
+    word-wrap: break-word;
+    white-space: normal;
+    padding: 5px;
+    margin-top: 15px;
+}
+
+.hiddenError {
+   visibility: hidden;
+}
+
+.form-title {
+  margin-top: 0px;
+}
+
+.form-actions{
+  text-align: center;
+}
+.loginwindow {
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  background-color: #eee;
+  padding: 30px;
+  box-sizing: border-box;
+  position: absolute;
+}
+canvas {
+  display: block;
+  vertical-align: bottom;
+}
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #b61924;
+  background-image: url("");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+}
