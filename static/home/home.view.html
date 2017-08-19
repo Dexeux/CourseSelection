@@ -1,11 +1,21 @@
-﻿<h1>Hi {{vm.user.firstName}}!</h1>
-<p>You're logged in!!</p>
-<h3>All registered users:</h3>
-<ul>
-    <li ng-repeat="user in vm.allUsers">
-        {{user.username}} ({{user.firstName}} {{user.lastName}})
-        - <a ng-click="vm.deleteUser(user.id)">Delete</a>
-    </li>
-</ul>
-<p>&nbsp;</p>
-<p><a ng-click="vm.logout()" class="btn btn-primary">Logout</a></p>
+﻿<p><a ng-click="vm.logout()" class="btn btn-primary">Logout</a></p>
+<h6>HOME PAGE</h6>
+<div class="btn-group">
+  <label class="btn btn-primary" ng-model="filters.math" uib-btn-checkbox>Math </label>
+  <label class="btn btn-primary" ng-model="filters.science" uib-btn-checkbox>Science </label>
+  <label class="btn btn-primary" ng-model="filters.english" uib-btn-checkbox>English </label>
+  <label class="btn btn-primary" ng-model="filters.history" uib-btn-checkbox>History </label>
+  <label class="btn btn-primary" ng-model="filters.elective" uib-btn-checkbox>Elective </label>
+</div>
+<br>
+<div class="btn-group" >
+    <label ng-click="vm.sort()" class="btn btn-primary">Sort Alphabetically</label>
+    <label ng-click="vm.shuffle()" class="btn btn-primary">Shuffle</label>
+</div>
+<div id="grid-content">
+		<div ng-repeat="course in vm.courses" ng-if="vm.isCourseInFilter(course)">
+			<h3>{{course.courseName}}</h3>
+			<p>{{course.courseSubject}}</p>
+			<p>{{course.courseCode}}</p>
+		</div>
+</div>

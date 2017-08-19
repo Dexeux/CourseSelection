@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" type="text/javascript" charset="UTF-8"></script>
+<script src="lib/jquery.vgrid.js"></script>
+<style type="text/css">
+/*<![CDATA[*/
+body {
+	padding: 10px;
+	margin: 0;
+}
+#message1 {
+	display: inline-block;
+	width: 6em;
+	text-align: center;
+	background: green;
+	visibility: hidden;
+	color: #FFFFFF;
+}
+#message2 {
+	display: inline-block;
+	width: 6em;
+	text-align: center;
+	background: red;
+	visibility: hidden;
+	color: #FFFFFF;
+}
+#grid-content {
+	overflow: hidden;
+	height: 0;
+	border: 1px solid #eb6100;
+	background-color: #EEEEEE;
+	background-repeat: repeat;
+
+}
+#grid-content div {
+	width: 150px;
+	height: 60px;
+	border: 1px solid #000000;
+	background-color: #AAAAAA;
+	color: #FFFFFF;
+	margin: 5px;
+	padding: 3px;
+}
+#grid-content div.wn {
+	width: 150px;
+}
+#grid-content div.wl {
+	width: 316px;
+}
+#grid-content div.hn {
+	height: 60px;
+}
+#grid-content div.hl {
+	height: 136px;
+}
+#grid-content div h3 {
+	line-height: 1.1em;
+	margin: 0;
+	padding: 0;
+}
+#grid-content div p {
+	margin: 0;
+	padding: 0;
+}
+/*]]>*/
+</style>
+<script type="text/javascript">
+//<![CDATA[
+$(function(){
+	var hsort_flg = false;
+
+	//setup
+	var vg = $("#grid-content").vgrid({
+		easing: "easeOutQuint",
+		time: 400,
+		delay: 20,
+		fadeIn: {
+			time: 500,
+			delay: 50,
+			wait: 500
+		}
+	});
+	$(window).on(function(e){
+		vg.vgrefresh();
+	});
+
+	//add item
+//	$("#additem").click(function(e){
+//		var _item = $('<div><h3>New Item</h3><p>Foo</p><p><a href="#">DELETE</a></p></div>')
+//			.fadeTo(0, 0)
+//			.addClass(Math.random() > 0.3 ? 'wn' : 'wl')
+//			.addClass(Math.random() > 0.3 ? 'hn' : 'hl');
+//		vg.prepend(_item);
+//		vg.vgrefresh(null, null, null, function(){
+//			_item.fadeTo(300, 1);
+//		});
+//		hsort_flg = true;
+//	});
+
+	//delete
+//	vg.on('click', 'a', function(e){
+//		$(this).parent().parent().fadeOut(200, function(){
+//			$(this).remove();
+//			vg.vgrefresh();
+//		});
+//		return false;
+//	});
+
+	//sort
+	$("#hsort").click(function(e){
+		hsort_flg = !hsort_flg;
+		$("#grid-content").vgsort(function(a, b){
+			var _a = $(a).find('h3').text();
+			var _b = $(b).find('h3').text();
+			var _c = hsort_flg ? 1 : -1 ;
+			return (_a > _b) ? _c * -1 : _c ;
+		}, "easeInOutExpo", 300, 0);
+		return false;
+	});
+	$("#rsort").click(function(e){
+		$("#grid-content").vgsort(function(a, b){
+			return Math.random() > 0.5 ? 1 : -1 ;
+		}, "easeInOutExpo", 300, 20);
+		hsort_flg = true;
+		return false;
+	});
+});
+//]]>
+</script>
+
+</head>
+<body>
+
+	<h2>Dynamic Grid, Start/Finish Event Example - Variable grid layout.</h2>
+	<form action="#" method="get" style="margin-bottom:10px;">
+		<input type="button" id="additem" value="Add Item" style="font-weight: bold;" />
+		<input type="button" id="hsort" value="Headline Sort" />
+		<input type="button" id="rsort" value="Random Sort" />
+		<span id="message1">onStart</span>
+		<span id="message2">onFinish</span>
+	</form>
+	<div id="grid-content">
+		<div>
+			<h3>AAA</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div>
+			<h3>BBB</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div class="wl">
+			<h3>CCC</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div>
+			<h3>DDD</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div>
+			<h3>EEE</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div>
+			<h3>FFF</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div>
+			<h3>GGG</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div wl="large">
+			<h3>HHH</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div>
+			<h3>III</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div>
+			<h3>JJJ</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div>
+			<h3>KKK</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div class="hl">
+			<h3>LLL</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div>
+			<h3>MMM</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div class="wl">
+			<h3>NNN</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div>
+			<h3>OOO</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div>
+			<h3>PPP</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div>
+			<h3>QQQ</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div>
+			<h3>RRR</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div>
+			<h3>SSS</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div>
+			<h3>TTT</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div class="wl">
+			<h3>UUU</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div>
+			<h3>VVV</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div>
+			<h3>WWW</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div>
+			<h3>XXX</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div>
+			<h3>YYY</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+		<div>
+			<h3>ZZZ</h3>
+			<p>Foo</p>
+			<p><a href="#">DELETE</a></p>
+		</div>
+	</div>
+
+
+</body>

@@ -2,7 +2,7 @@
     'use strict';
 
     var app = angular
-        .module('app', ['ui.router', 'ngCookies'])
+        .module('app', ['ui.router', 'ngCookies', 'ngAnimate', 'ngSanitize', 'ui.bootstrap'])
         .config(config)
         .run(run);
 

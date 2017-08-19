@@ -55,15 +55,15 @@ def courses(request):
     Request load: {searchParam: ''}
     """
     response = Response(data={'status': 'error'}, status=status.HTTP_200_OK)
-    request_data = json.loads(request.body)
-    if request_data.get('searchParam'):
-        search = request_data.get('searchParam')
-        course_list = Course.objects.filter(Q(course_code__contains=search) | Q(course_name__contains=search)|Q(course_subject__contains=search))
-        courses_dict = ([obj.as_dict() for obj in course_list])
-        response.data = {
-                'status': 'success',
-                'data': courses_dict
-            }
+    print(request)
+    search =  request.GET.get('query', '')
+    print(search)
+    course_list = Course.objects.filter(Q(course_code__contains=search) | Q(course_name__contains=search)|Q(course_subject__contains=search))
+    courses_dict = ([obj.as_dict() for obj in course_list])
+    response.data = {
+            'status': 'success',
+            'data': courses_dict
+        }
     return response
 
 @api_view(['POST'])
