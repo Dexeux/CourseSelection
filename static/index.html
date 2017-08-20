@@ -8,8 +8,8 @@
 </head>
 <body ng-controller="main">
 
-    <div ui-view></div>
-
+    <div class="main-view" ui-view></div>
+    <div id="particles-js" class="background"></div>
     <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="//code.angularjs.org/1.6.0/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>
@@ -23,6 +23,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js" type="text/javascript" charset="UTF-8"></script>
     <script src="lib/particles.min.js"></script>
     <script src="lib/jquery.vgrid.js"></script>
+    <script src="shared/particlesConf.js"></script>
 
     <script src="app.js"></script>
     <script src="app-services/authentication.service.js"></script>
@@ -33,5 +34,7 @@
     <script src="home/home.controller.js"></script>
     <script src="login/login.controller.js"></script>
     <script src="register/register.controller.js"></script>
+    <script src="profile/profile.controller.js"></script>
+    <script src="create/create.controller.js"></script>
 </body>
 </html>

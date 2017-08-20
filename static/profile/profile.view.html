@@ -1,13 +1,13 @@
 ﻿<div class="header blur">
     <div class="right-margin">
         <div class="from-right">
-            <a ng-click="vm.goToProfile()" class="btn btn-primary">Profile</a>
+            <a ng-click="vm.goToCourseSelection()" class="btn btn-primary">Course Selection</a>
             <a ng-click="vm.logout()" class="btn btn-danger">Logout</a>
         </div>
     </div>
     <div class="margins">
         <div style="display: inline-flex;">
-            <h1 class="form-title">Course Selection</h1>
+            <h1 class="form-title">Profile</h1>
         </div>
     </div>
 </div>
@@ -25,17 +25,19 @@
             <label ng-click="vm.shuffle()" class="btn btn-primary">Shuffle</label>
         </div>
         <div class="btn-group top-right-pad">
-            <label ng-click="vm.register()" class="btn btn-success">Register</label>
+            <label ng-click="vm.unRegister()" class="btn btn-success">Drop</label>
         </div>
     </div>
+    <div style="margin-top:0; margin-bottom: 10px" ng-class="{ 'alert': true, 'alert-success': vm.hasRequired, 'alert-danger': !vm.hasRequired }" ng-show="true">{{vm.message}}</div>
     <div style="margin-top:0; margin-bottom: 10px" ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error', 'hiddenError': !flash }" ng-show="true" ng-bind="flash.message">Error</div>
     <div id="grid-content">
-            <div class="nonSelectable" ng-repeat="course in vm.courses" ng-if="vm.isCourseInFilter(course)"
-                 ng-class="{'{{course.courseSubject.toLowerCase()}}': true, highlighted: course.selected}"
-                 ng-click="vm.selectCourse(course)">
-                <h3>{{course.courseName}}</h3>
-                <p>{{course.courseSubject}}</p>
-                <p>{{course.courseCode}}</p>
-            </div>
+        <div class="nonSelectable" ng-repeat="course in vm.courses" ng-if="vm.isCourseInFilter(course)"
+             ng-class="{'{{course.courseSubject.toLowerCase()}}': true, highlighted: course.selected}"
+             ng-click="vm.selectCourse(course)">
+            <h3>{{course.courseName}}</h3>
+            <p>{{course.courseSubject}}</p>
+            <p>{{course.courseCode}}</p>
+        </div>
     </div>
+
 </div>

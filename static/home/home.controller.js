@@ -5,36 +5,37 @@
         .module('app')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['CoursesService', '$scope', 'AuthenticationService', '$location', '$window', '$timeout'];
-    function HomeController(CoursesService, $scope, AuthenticationService, $location, $window, $timeout) {
+    HomeController.$inject = ['CoursesService', '$scope', 'AuthenticationService', '$location', 'FlashService', '$timeout'];
+    function HomeController(CoursesService, $scope, AuthenticationService, $location, FlashService, $timeout) {
         var vm = this;
 	    var hsort_flg = false;
 	    var vg;
         $scope.filters = {math: true, science: true, english: true, history: true, elective: true};
-        vm.courses = [{courseCode:"123", courseName:"AAA", courseSubject: "English"},
-            {courseCode:"321", courseName:"CCC", courseSubject: "Math"},
-            {courseCode:"321", courseName:"BBB", courseSubject: "Math"}];
+        vm.courses = [];
 
         vm.logout = logout;
+        vm.goToProfile = goToProfile;
+        vm.isCourseInFilter = isCourseInFilter;
+        vm.selectCourse = selectCourse;
+        vm.register = register;
         vm.sort = sort;
         vm.shuffle = shuffle;
-        vm.isCourseInFilter = isCourseInFilter;
 
-        initController();
 
+        getCourses();
+
+        //Watch if filters change
         $scope.$watch("filters", function(newValue, oldValue) {
             $timeout(setUpCardDisplay, 0);
         }, true);
 
-        function initController() {
+        function getCourses() {
             CoursesService.GetAll().then(function(response){
-                console.log(response);
                 if(response.status === "success"){
-                    console.log(response.data);
-                    // vm.courses = response.data;
+                    vm.courses = response.data;
+                    setUpCardDisplay();
                 }
             });
-            setUpCardDisplay();
         }
 
         function logout(){
@@ -43,6 +44,33 @@
             });
         }
 
+        function goToProfile(){
+            $location.path('/profile');
+        }
+
+        function isCourseInFilter(course){
+            return $scope.filters[course.courseSubject.toLowerCase()];
+        }
+
+        function selectCourse(course){
+            course.selected = !course.selected;
+        }
+
+        function register(){
+            var selected = vm.courses.filter(function(course){
+                return course.selected;
+            });
+            CoursesService.Register(selected).then(function(response){
+                if(response.status === 'success'){
+                    FlashService.Success('Courses registered successfully.');
+                } else {
+                    FlashService.Error('Error');
+                }
+                getCourses();
+            });
+        }
+
+        //Visual Functions
         function sort(){
             $(function() {
                 hsort_flg = !hsort_flg;
@@ -65,10 +93,6 @@
             });
         }
 
-        function isCourseInFilter(course){
-            return $scope.filters[course.courseSubject.toLowerCase()];
-        }
-
         //Setup the card display
         function setUpCardDisplay(){
             $(function(){
@@ -86,29 +110,6 @@
                 $(window).on(function(e){
                     vg.vgrefresh();
                 });
-
-
-                    //add item
-                //	$("#additem").click(function(e){
-                //		var _item = $('<div><h3>New Item</h3><p>Foo</p><p><a href="#">DELETE</a></p></div>')
-                //			.fadeTo(0, 0)
-                //			.addClass(Math.random() > 0.3 ? 'wn' : 'wl')
-                //			.addClass(Math.random() > 0.3 ? 'hn' : 'hl');
-                //		vg.prepend(_item);
-                //		vg.vgrefresh(null, null, null, function(){
-                //			_item.fadeTo(300, 1);
-                //		});
-                //		hsort_flg = true;
-                //	});
-
-                    //delete
-                //	vg.on('click', 'a', function(e){
-                //		$(this).parent().parent().fadeOut(200, function(){
-                //			$(this).remove();
-                //			vg.vgrefresh();
-                //		});
-                //		return false;
-                //	});
             });
         }
     }

@@ -30,7 +30,7 @@
                     vm.dataLoading = false;
                 }
             });
-        };
+        }
     }
 
 })();

@@ -1,21 +1,41 @@
-﻿<p><a ng-click="vm.logout()" class="btn btn-primary">Logout</a></p>
-<h6>HOME PAGE</h6>
-<div class="btn-group">
-  <label class="btn btn-primary" ng-model="filters.math" uib-btn-checkbox>Math </label>
-  <label class="btn btn-primary" ng-model="filters.science" uib-btn-checkbox>Science </label>
-  <label class="btn btn-primary" ng-model="filters.english" uib-btn-checkbox>English </label>
-  <label class="btn btn-primary" ng-model="filters.history" uib-btn-checkbox>History </label>
-  <label class="btn btn-primary" ng-model="filters.elective" uib-btn-checkbox>Elective </label>
+﻿<div class="header blur">
+    <div class="right-margin">
+        <div class="from-right">
+            <a ng-click="vm.goToProfile()" class="btn btn-primary">Profile</a>
+            <a ng-click="vm.logout()" class="btn btn-danger">Logout</a>
+        </div>
+    </div>
+    <div class="margins">
+        <div style="display: inline-flex;">
+            <h1 class="form-title">Course Selection</h1>
+        </div>
+    </div>
 </div>
-<br>
-<div class="btn-group" >
-    <label ng-click="vm.sort()" class="btn btn-primary">Sort Alphabetically</label>
-    <label ng-click="vm.shuffle()" class="btn btn-primary">Shuffle</label>
-</div>
-<div id="grid-content">
-		<div ng-repeat="course in vm.courses" ng-if="vm.isCourseInFilter(course)">
-			<h3>{{course.courseName}}</h3>
-			<p>{{course.courseSubject}}</p>
-			<p>{{course.courseCode}}</p>
-		</div>
+<div class="margins blur">
+    <div class="button-header">
+        <div class="btn-group top-right-pad">
+          <label class="btn btn-primary" ng-model="filters.math" uib-btn-checkbox>Math </label>
+          <label class="btn btn-primary" ng-model="filters.science" uib-btn-checkbox>Science </label>
+          <label class="btn btn-primary" ng-model="filters.english" uib-btn-checkbox>English </label>
+          <label class="btn btn-primary" ng-model="filters.history" uib-btn-checkbox>History </label>
+          <label class="btn btn-primary" ng-model="filters.elective" uib-btn-checkbox>Elective </label>
+        </div>
+        <div class="btn-group top-right-pad">
+            <label ng-click="vm.sort()" class="btn btn-primary">Sort Alphabetically</label>
+            <label ng-click="vm.shuffle()" class="btn btn-primary">Shuffle</label>
+        </div>
+        <div class="btn-group top-right-pad">
+            <label ng-click="vm.register()" class="btn btn-success">Register</label>
+        </div>
+    </div>
+    <div style="margin-top:0; margin-bottom: 10px" ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error', 'hiddenError': !flash }" ng-show="true" ng-bind="flash.message">Error</div>
+    <div id="grid-content">
+            <div class="nonSelectable" ng-repeat="course in vm.courses" ng-if="vm.isCourseInFilter(course)"
+                 ng-class="{'{{course.courseSubject.toLowerCase()}}': true, highlighted: course.selected}"
+                 ng-click="vm.selectCourse(course)">
+                <h3>{{course.courseName}}</h3>
+                <p>{{course.courseSubject}}</p>
+                <p>{{course.courseCode}}</p>
+            </div>
+    </div>
 </div>

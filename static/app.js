@@ -20,6 +20,18 @@
                 templateUrl: 'home/home.view.html',
                 controllerAs: 'vm'
             })
+            .state('profile', {
+                url: "/profile",
+                controller: 'ProfileController',
+                templateUrl: 'profile/profile.view.html',
+                controllerAs: 'vm'
+            })
+            .state('create', {
+                url: "/create",
+                controller: 'CreateCourseController',
+                templateUrl: 'create/create.view.html',
+                controllerAs: 'vm'
+            })
             .state('unauthenticated', {
                 controller: 'LoginController',
                 templateUrl: 'shared/unauthenticated.view.html',
