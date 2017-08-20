@@ -36,3 +36,9 @@ http://localhost:8000/webapp/index.html
 
 Create courses at:
 http://localhost:8000/webapp/index.html#!/create
+
+#Examples
+
+![Login Page](https://raw.githubusercontent.com/Dexeux/CourseSelection/master/Examples/login.PNG)
+![Course Registration](https://raw.githubusercontent.com/Dexeux/CourseSelection/master/Examples/course-selection.PNG)
+
