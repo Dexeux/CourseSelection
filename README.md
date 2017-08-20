@@ -19,4 +19,19 @@ Python Version 3.6.1
    - pip install -r requirements.txt
 
 4. Migrate databases
-   - python manage.py
+   - python manage.py makemigrations
+   - python manage.py migrate
+
+5. Collect static files
+   - python manage.py collectstatic
+   - yes
+
+6. Run server
+   - python manage.py runserver
+
+
+Open Application at;
+http://localhost:8000/webapp/index.html
+
+Create courses at:
+http://localhost:8000/webapp/index.html#!/create
