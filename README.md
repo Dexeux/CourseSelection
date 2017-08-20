@@ -30,6 +30,9 @@ Python Version 3.6.1
 6. Run server
    - python manage.py runserver
 
+6. Unit test
+   - python manage.py test
+
 
 Open Application at;
 http://localhost:8000/webapp/index.html
