@@ -34,6 +34,7 @@
             }
         }
 
+        // Display a success message
         function Success(message, keepAfterLocationChange) {
             $rootScope.flash = {
                 message: message,
@@ -42,6 +43,7 @@
             };
         }
 
+        // Display a error message
         function Error(message, keepAfterLocationChange) {
             $rootScope.flash = {
                 message: message,

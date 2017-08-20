@@ -26,6 +26,8 @@
             $location.path('/home');
         }
 
+
+        // Creates a course
         function createCourse(){
             if(!vm.course.courseCode || !vm.course.courseName || !vm.course.courseSubject){ return; }
             CoursesService.Create(vm.course).then(function(response){
@@ -37,6 +39,7 @@
             });
         }
 
+        // Adds 10 random courses to the database
         function createRandomCourses(){
             var coursesToAdd = [];
             for (var i = 0; i < 10; i ++){

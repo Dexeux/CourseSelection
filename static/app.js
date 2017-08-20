@@ -13,6 +13,7 @@
         $urlRouterProvider.when('', '/home');
         $urlRouterProvider.otherwise("/home");
 
+        // Declare path routes
         $stateProvider
             .state('authenticated', {
                 url: "/home",

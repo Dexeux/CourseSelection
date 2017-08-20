@@ -38,10 +38,10 @@
             return $http.post('/api/v1/courses/unregister', courses).then(handleSuccess, handleError('Error creating user'));
         }
 
+        // private functions
         function handleSuccess(res) {
             return res.data;
         }
-        // private functions
 
         function handleError(error) {
             return function () {

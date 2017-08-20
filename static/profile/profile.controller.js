@@ -41,6 +41,7 @@
 
         //Course Functions
 
+        //Gets the current list of registered courses
         function getCourses() {
             CoursesService.GetRegistered().then(function(response){
                 if(response.status === "success"){

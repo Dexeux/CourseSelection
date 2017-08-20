@@ -29,6 +29,7 @@
             $timeout(setUpCardDisplay, 0);
         }, true);
 
+        //Gets the list of courses available to register
         function getCourses() {
             CoursesService.GetAll().then(function(response){
                 if(response.status === "success"){
