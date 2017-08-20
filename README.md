@@ -12,7 +12,8 @@ Python Version 3.6.1
 
 2. if using a virtual environment
    - virtualenv venv
-   Windows - venv/Scripts/activate.bat | - source venv/Scripts/activate
+   - Windows: venv/Scripts/activate.bat 
+   - Bash: source venv/Scripts/activate
 
 3. Install dependencies
    - cd coursepicker
