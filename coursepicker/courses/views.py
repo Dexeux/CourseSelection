@@ -64,7 +64,7 @@ def get_courses(request):
     response = Response(data={'status': 'error'}, status=status.HTTP_200_OK)
     user = request.user
     search =  request.GET.get('query', '')
-    if user: #Get courses user is not in
+    if user and not (user.id is None): #Get courses user is not in
         course_list = Course.objects.filter((Q(course_code__contains=search) | Q(course_name__contains=search)|Q(course_subject__contains=search)) & ~Q(student__id=user.id))
     else:
         course_list = Course.objects.filter(Q(course_code__contains=search) | Q(course_name__contains=search) | Q(course_subject__contains=search))
